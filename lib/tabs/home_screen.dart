@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:sust_app/constants/app_constants.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -51,13 +52,31 @@ class HomeScreen extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
-        child: ElevatedButton(
-            onPressed: () {
-              createCustomersCollection()
-                  .then((value) => debugPrint("succcess"));
-            },
-            child: Text("Click")),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                createCustomersCollection()
+                    .then((value) => debugPrint("succcess"));
+              },
+              child: Text("Click"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                AppConstants.hideNavBar(false, context);
+              },
+              child: Text("Show"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                AppConstants.hideNavBar(true, context);
+              },
+              child: Text("Hide"),
+            ),
+          ],
+        ),
       ),
     );
   }
