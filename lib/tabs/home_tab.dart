@@ -1,12 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sust_app/constants/app_constants.dart';
+import 'package:sust_app/utills/custom_elevated_button.dart';
+import 'package:sust_app/utills/custom_text_field.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeTab extends StatefulWidget {
+  const HomeTab({super.key});
 
   @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  @override
   Widget build(BuildContext context) {
+    TextEditingController nameController = TextEditingController();
+
+    String? userName;
+
     Future<List<Map<String, dynamic>>> getUsers() async {
       List<Map<String, dynamic>> userList = [];
 
@@ -36,11 +47,11 @@ class HomeScreen extends StatelessWidget {
         FirebaseFirestore firestore = FirebaseFirestore.instance;
 
         // Create a collection reference
-        CollectionReference customers = firestore.collection('customer');
+        CollectionReference customers = firestore.collection('users');
 
         // Add a document to the "customers" collection with an auto-generated ID
         await customers.add({
-          'name': 'Minhazul Islam Emon',
+          'name': '$userName',
           'email': 'john@example.com',
           'phone': '+1234567890',
         });
@@ -75,6 +86,26 @@ class HomeScreen extends StatelessWidget {
               },
               child: Text("Hide"),
             ),
+            CustomTextField(
+              controller: nameController,
+            ),
+            CustomElevatedButton(
+              title: "Save",
+              onPressed: () {
+                setState(() {
+                  userName = nameController.text.toString();
+                });
+                createCustomersCollection()
+                    .then((value) => debugPrint("succcess"));
+                debugPrint(nameController.text.toString());
+              },
+            ),
+            Container(
+              height: 100,
+              width: 200,
+              color: Theme.of(context).primaryColor,
+            ),
+            
           ],
         ),
       ),
