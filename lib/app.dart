@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:sust_app/models/theme.dart';
 import 'package:sust_app/providers/tab_controller_provider.dart';
 import 'package:sust_app/providers/theme_bloc.dart';
-import 'package:sust_app/screens/home.dart';
 import 'package:sust_app/screens/splash.dart';
 
 class MyApp extends StatelessWidget {
