@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:sust_app/screens/helper.dart';
+import 'package:sust_app/utills/helper.dart';
 import 'package:sust_app/screens/home.dart';
 
 class SplashScreen extends StatefulWidget {
